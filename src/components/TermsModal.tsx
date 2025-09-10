@@ -96,7 +96,7 @@ export default function TermsModal({ open, onClose }: TermsModalProps) {
 
         <div className="mt-6 flex justify-end">
           <button
-            className="px-4 py-2 bg-gray-200 rounded-lg"
+            className="px-4 py-2 bg-primary text-white rounded-lg"
             onClick={onClose}
           >
             Close

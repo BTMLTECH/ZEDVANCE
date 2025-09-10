@@ -113,11 +113,12 @@ const LoanApplicationForm: React.FC = () => {
   
   };
 
-  const SectionHeader: React.FC<{ title: string }> = ({ title }) => (
-    <div className="bg-form-section text-form-section-foreground px-4 py-3 font-semibold text-sm uppercase tracking-wide">
-      {title}
-    </div>
-  );
+    const SectionHeader: React.FC<{ title: string }> = ({ title }) => (
+      <div className="bg-primary text-primary-foreground px-4 py-3 font-semibold text-sm uppercase tracking-wide rounded-md shadow-sm">
+        {title}
+      </div>
+    );
+
 
   return (
     <div className="min-h-screen bg-form-bg py-8 px-4">
@@ -149,7 +150,7 @@ const LoanApplicationForm: React.FC = () => {
 
       {/* Loan Title & Selection */}
       <div className="text-center mt-6 lg:mt-0">
-        <h1 className="text-2xl md:text-3xl font-bold mb-4">LOAN APPLICATION FORM</h1>
+        <h1 className="text-2xl text-primary md:text-3xl font-bold mb-4">LOAN APPLICATION FORM</h1>
         <div className="mb-4">
           <p className="text-sm font-medium mb-2">SELECT LOAN TYPE</p>
           <div className="flex flex-wrap gap-4 justify-center">
@@ -917,7 +918,7 @@ const LoanApplicationForm: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setShowTerms(true)}
-                      className="text-blue-600 underline"
+                      className="text-primary underline"
                     >
                       read our Terms & Conditions
                     </button>{" "}
