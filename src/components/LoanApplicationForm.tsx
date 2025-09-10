@@ -177,10 +177,11 @@ const LoanApplicationForm: React.FC = () => {
           id="bvn"
           value={formData.bvn}
           onChange={(e) => handleInputChange('bvn', e.target.value)}
-          className="mt-1 max-w-xs"
+          className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           placeholder="Enter your BVN"
         />
       </div>
+
           
       {/* Disclaimer */}
       <div className="mt-4 text-xs text-muted-foreground">
@@ -223,7 +224,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="firstName"
                     value={formData.firstName}
                     onChange={(e) => handleInputChange('firstName', e.target.value)}
-                    className="mt-1"
+                    className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -233,7 +235,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="lastName"
                     value={formData.lastName}
                     onChange={(e) => handleInputChange('lastName', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -273,7 +276,8 @@ const LoanApplicationForm: React.FC = () => {
                   <Label htmlFor="stateOfOrigin">State of Origin</Label>
                   <Input
                     id="stateOfOrigin"
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -315,7 +319,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="identificationNo"
                     value={formData.identificationNo}
                     onChange={(e) => handleInputChange('identificationNo', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -326,7 +331,8 @@ const LoanApplicationForm: React.FC = () => {
                     type="date"
                     value={formData.dateOfBirth}
                     onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
               </div>
@@ -342,7 +348,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="mobile"
                     value={formData.mobile}
                     onChange={(e) => handleInputChange('mobile', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -353,7 +360,8 @@ const LoanApplicationForm: React.FC = () => {
                     type="email"
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -363,7 +371,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="homeAddress"
                     value={formData.homeAddress}
                     onChange={(e) => handleInputChange('homeAddress', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -373,7 +382,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="building"
                     value={formData.building}
                     onChange={(e) => handleInputChange('building', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -383,7 +393,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="landmark"
                     value={formData.landmark}
                     onChange={(e) => handleInputChange('landmark', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -393,7 +404,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="busStop"
                     value={formData.busStop}
                     onChange={(e) => handleInputChange('busStop', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -403,7 +415,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="lga"
                     value={formData.lga}
                     onChange={(e) => handleInputChange('lga', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -413,7 +426,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="state"
                     value={formData.state}
                     onChange={(e) => handleInputChange('state', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -423,7 +437,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="stayLength"
                     value={formData.stayLength}
                     onChange={(e) => handleInputChange('stayLength', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -433,7 +448,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="previousAddress"
                     value={formData.previousAddress}
                     onChange={(e) => handleInputChange('previousAddress', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -459,7 +475,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="refereePhone"
                     value={formData.refereePhone}
                     onChange={(e) => handleInputChange('refereePhone', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -469,7 +486,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="spousePhone"
                     value={formData.spousePhone}
                     onChange={(e) => handleInputChange('spousePhone', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -479,7 +497,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="dependents"
                     value={formData.dependents}
                     onChange={(e) => handleInputChange('dependents', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
               </div>
@@ -511,7 +530,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="occupation"
                     value={formData.occupation}
                     onChange={(e) => handleInputChange('occupation', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -521,7 +541,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="designation"
                     value={formData.designation}
                     onChange={(e) => handleInputChange('designation', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -531,7 +552,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="department"
                     value={formData.department}
                     onChange={(e) => handleInputChange('department', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -541,7 +563,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="employerName"
                     value={formData.employerName}
                     onChange={(e) => handleInputChange('employerName', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -551,7 +574,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="officeAddress"
                     value={formData.officeAddress}
                     onChange={(e) => handleInputChange('officeAddress', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -561,7 +585,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="officeLandmark"
                     value={formData.officeLandmark}
                     onChange={(e) => handleInputChange('officeLandmark', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -571,7 +596,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="officeLga"
                     value={formData.officeLga}
                     onChange={(e) => handleInputChange('officeLga', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -581,7 +607,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="officeState"
                     value={formData.officeState}
                     onChange={(e) => handleInputChange('officeState', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -592,7 +619,8 @@ const LoanApplicationForm: React.FC = () => {
                     type="email"
                     value={formData.officialEmail}
                     onChange={(e) => handleInputChange('officialEmail', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -602,7 +630,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="timeInEmployment"
                     value={formData.timeInEmployment}
                     onChange={(e) => handleInputChange('timeInEmployment', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -612,7 +641,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="taxId"
                     value={formData.taxId}
                     onChange={(e) => handleInputChange('taxId', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -622,7 +652,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="netIncome"
                     value={formData.netIncome}
                     onChange={(e) => handleInputChange('netIncome', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -632,7 +663,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="staffId"
                     value={formData.staffId}
                     onChange={(e) => handleInputChange('staffId', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -642,7 +674,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="otherIncome"
                     value={formData.otherIncome}
                     onChange={(e) => handleInputChange('otherIncome', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -692,7 +725,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="loanAmount"
                     value={formData.loanAmount}
                     onChange={(e) => handleInputChange('loanAmount', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                     placeholder="₦"
                   />
                 </div>
@@ -718,7 +752,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="loanPurpose"
                     value={formData.loanPurpose}
                     onChange={(e) => handleInputChange('loanPurpose', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
 
@@ -760,7 +795,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="repaymentIfYes"
                     value={formData.repaymentIfYes}
                     onChange={(e) => handleInputChange('repaymentIfYes', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
               </div>
@@ -778,7 +814,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="kinName"
                     value={formData.kinName}
                     onChange={(e) => handleInputChange('kinName', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -788,7 +825,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="kinRelationship"
                     value={formData.kinRelationship}
                     onChange={(e) => handleInputChange('kinRelationship', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -798,7 +836,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="kinAddress"
                     value={formData.kinAddress}
                     onChange={(e) => handleInputChange('kinAddress', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -808,7 +847,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="kinPhone"
                     value={formData.kinPhone}
                     onChange={(e) => handleInputChange('kinPhone', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -819,7 +859,8 @@ const LoanApplicationForm: React.FC = () => {
                     type="email"
                     value={formData.kinEmail}
                     onChange={(e) => handleInputChange('kinEmail', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
                 
@@ -829,7 +870,8 @@ const LoanApplicationForm: React.FC = () => {
                     id="kinEmployer"
                     value={formData.kinEmployer}
                     onChange={(e) => handleInputChange('kinEmployer', e.target.value)}
-                    className="mt-1"
+                              className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                   />
                 </div>
               </div>
@@ -849,7 +891,8 @@ const LoanApplicationForm: React.FC = () => {
                     <Label htmlFor="fullName">Full Name</Label>
                     <Input
                       id="fullName"
-                      className="mt-1"
+                                className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                     />
                   </div>
                   
@@ -857,7 +900,8 @@ const LoanApplicationForm: React.FC = () => {
                     <Label htmlFor="signatureDate">Signature & Date</Label>
                     <Input
                       id="signatureDate"
-                      className="mt-1"
+                                className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                     />
                   </div>
                 </div>
@@ -887,7 +931,8 @@ const LoanApplicationForm: React.FC = () => {
                         onCheckedChange={(checked) =>
                           handleInputChange("privacyConsent", checked)
                         }
-                        className="mt-1"
+                                  className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                       />
                       <span className="text-sm">
                         I confirm that I have read, understood and agree to the above
@@ -901,7 +946,8 @@ const LoanApplicationForm: React.FC = () => {
                         onCheckedChange={(checked) =>
                           handleInputChange("kinConsent", checked)
                         }
-                        className="mt-1"
+                                  className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+
                       />
                       <span className="text-sm">
                         I confirm that I have obtained permission from my next of kin/any
