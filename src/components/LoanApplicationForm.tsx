@@ -80,6 +80,8 @@ const LoanApplicationForm: React.FC = () => {
     kinConsent: false,
   });
   const [showTerms, setShowTerms] = useState(false);
+  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
+
 
 
   const handleInputChange = (field: keyof FormDatas, value: any) => {
@@ -129,37 +131,50 @@ const LoanApplicationForm: React.FC = () => {
   <Card className="shadow-lg">
     <CardContent className="p-6">
 <div className="mb-8">
-  <div className="p-6">
+  <div className="p-6 bg-white shadow-md rounded-2xl">
     {/* Header */}
-    <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-between lg:items-start">
+    <div className="flex flex-col items-center gap-10 lg:flex-row lg:justify-between lg:items-start">
       
-      {/* Logo & Company Info (stacked under logo) */}
-      <div className="flex flex-col items-center text-center space-y-3">
-     
+      {/* Logo & Company Info */}
+      <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-3">
         {/* Company Info */}
         <div className="space-y-1">
-          <div className="text-2xl font-bold text-primary">BTM HOLIDAY'S</div>
-          <div className="text-sm text-muted-foreground">
-            <p>45, Oduduwa way,</p>
+          <div className="text-3xl font-extrabold text-[#FFA30E] tracking-wide">
+            BTM HOLIDAY
+          </div>
+          <p className="text-sm font-medium text-gray-700">
+            In partnership with <span className="font-semibold">Zedvance Finance Limited</span>
+          </p>
+          <div className="text-sm text-gray-500 leading-relaxed">
+            <p>45, Oduduwa Way,</p>
             <p>Ikeja, Lagos.</p>
             <p>Tel: 08129911906</p>
-            <p>www.btmliminted.net</p>
+            <a 
+              href="http://www.btmlimited.net" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-primary hover:underline"
+            >
+              www.btmlimited.net
+            </a>
           </div>
         </div>
       </div>
 
       {/* Loan Title & Selection */}
-      <div className="text-center mt-6 lg:mt-0">
-        <h1 className="text-2xl text-primary md:text-3xl font-bold mb-4">LOAN APPLICATION FORM</h1>
-        <div className="mb-4">
-          <p className="text-sm font-medium mb-2">SELECT LOAN TYPE</p>
-          <div className="flex flex-wrap gap-4 justify-center">
+      <div className="text-center lg:text-right mt-6 lg:mt-0">
+        <h1 className="text-3xl md:text-4xl font-bold text-[#FFA30E] mb-3">
+          LOAN APPLICATION FORM
+        </h1>
+        <div className="bg-gray-50 border rounded-lg p-4 shadow-sm">
+          <p className="text-sm font-medium mb-3 text-gray-700">Select Loan Type</p>
+          <div className="flex flex-wrap gap-4 justify-center lg:justify-end">
             <label className="flex items-center space-x-2 cursor-pointer">
               <Checkbox 
                 checked={formData.loanType === 'TRAVEL LOAN'}
                 onCheckedChange={() => handleInputChange('loanType', 'TRAVEL LOAN')}
               />
-              <span className="text-sm">TRAVEL LOAN</span>
+              <span className="text-sm font-medium">TRAVEL LOAN</span>
             </label>
           </div>
         </div>
@@ -167,6 +182,7 @@ const LoanApplicationForm: React.FC = () => {
     </div>
   </div>
 </div>
+
 
 
 
@@ -998,61 +1014,74 @@ const LoanApplicationForm: React.FC = () => {
             </CardContent>
 
             {/* Privacy Policy */}
-             <SectionHeader title="TERMS & CONDITIONS" />
-              <CardContent className="p-6">
-                <div className="space-y-4">
-                  <p className="text-xs text-muted-foreground">
-                    By continuing, you agree to{" "}
-                    <button
-                      type="button"
-                      onClick={() => setShowTerms(true)}
-                      className="text-primary underline"
-                    >
-                      read our Terms & Conditions
-                    </button>{" "}
-                    for instalment payment with Zedvance.
-                  </p>
+      
 
-                  <div className="space-y-3">
-                    <label className="flex items-start space-x-3 cursor-pointer">
-                      <Checkbox
-                        checked={formData.privacyConsent}
-                        onCheckedChange={(checked) =>
-                          handleInputChange("privacyConsent", checked)
-                        }
-                            className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2
-               focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
-               focus-visible:outline-none focus-visible:ring-primary"
+<SectionHeader title="TERMS & CONDITIONS" />
+<CardContent className="p-6">
+  <div className="space-y-4">
+    <p className="text-xs text-muted-foreground">
+      To continue, you must{" "}
+      <button
+        type="button"
+        onClick={() => setShowTerms(true)} // ✅ opens modal
+        className="text-primary underline"
+      >
+        read our Terms & Conditions
+      </button>{" "}
+      for instalment payments with Zedvance.
+    </p>
 
-                      />
-                      <span className="text-sm">
-                        I confirm that I have read, understood and agree to the above
-                        Terms & Conditions.
-                      </span>
-                    </label>
+    {/* ✅ Only show checkboxes after acceptance */}
+    {hasAcceptedTerms ? (
+      <div className="space-y-3">
+        <label className="flex items-start space-x-3 cursor-pointer">
+          <Checkbox
+            checked={formData.privacyConsent}
+            onCheckedChange={(checked) =>
+              handleInputChange("privacyConsent", checked)
+            }
+            className="mt-1"
+          />
+          <span className="text-sm">
+            I confirm that I have read, understood, and agree to the Terms & Conditions.
+          </span>
+        </label>
 
-                    <label className="flex items-start space-x-3 cursor-pointer">
-                      <Checkbox
-                        checked={formData.kinConsent}
-                        onCheckedChange={(checked) =>
-                          handleInputChange("kinConsent", checked)
-                        }
-                            className="mt-1 max-w-xs border border-gray-300 rounded-md px-3 py-2
-               focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary
-               focus-visible:outline-none focus-visible:ring-primary"
+        <label className="flex items-start space-x-3 cursor-pointer">
+          <Checkbox
+            checked={formData.kinConsent}
+            onCheckedChange={(checked) =>
+              handleInputChange("kinConsent", checked)
+            }
+            className="mt-1"
+          />
+          <span className="text-sm">
+            I confirm that I have obtained permission from my next of kin or any third party
+            to provide their personal data to BTM.
+          </span>
+        </label>
+      </div>
+    ) : (
+      <p className="text-xs text-gray-500 italic">
+        Please read and accept the Terms & Conditions to proceed.
+      </p>
+    )}
+  </div>
+</CardContent>
 
-                      />
-                      <span className="text-sm">
-                        I confirm that I have obtained permission from my next of kin/any
-                        third party to provide their personal data to us.
-                      </span>
-                    </label>
-                  </div>
-                </div>
-              </CardContent>
+{/* ✅ Terms Modal */}
+<TermsModal
+  open={showTerms}
+  onClose={() => setShowTerms(false)}
+  onAccept={() => {
+    setHasAcceptedTerms(true);
+    setShowTerms(false);
+  }}
+/>
 
-            {/* Terms Modal */}
-            <TermsModal open={showTerms} onClose={() => setShowTerms(false)} />
+
+
+         
 
             {/* Submit Button */}
             <CardContent className="p-6 bg-muted">

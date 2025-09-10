@@ -1,19 +1,56 @@
+import { useState, useRef, useEffect } from "react";
+
 interface TermsModalProps {
   open: boolean;
   onClose: () => void;
+  onAccept?: () => void;
 }
 
-export default function TermsModal({ open, onClose }: TermsModalProps) {
+export default function TermsModal({ open, onClose, onAccept }: TermsModalProps) {
+  const [canAccept, setCanAccept] = useState(false);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  // Reset accept state & scroll when modal opens
+  useEffect(() => {
+    if (open) {
+      setCanAccept(false);
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop = 0;
+      }
+    }
+  }, [open]);
+
   if (!open) return null;
 
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const { scrollTop, scrollHeight, clientHeight } = scrollRef.current;
+
+    // Enable accept button when scrolled to bottom
+    if (scrollTop + clientHeight >= scrollHeight - 10) {
+      setCanAccept(true);
+    }
+  };
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white rounded-2xl shadow-lg max-w-3xl w-full p-6 overflow-y-auto max-h-[80vh]">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+      onClick={onClose} // click outside closes modal
+    >
+      <div
+        className="bg-white rounded-2xl shadow-lg max-w-3xl w-full p-6 flex flex-col"
+        onClick={(e) => e.stopPropagation()} // prevent modal close when clicking inside
+      >
         <h2 className="text-lg font-semibold mb-4">
           Terms & Conditions for Instalment Payment Option with Zedvance
         </h2>
 
-        <div className="space-y-6 text-sm text-gray-700 leading-relaxed">
+        {/* Scrollable terms content */}
+        <div
+          ref={scrollRef}
+          onScroll={handleScroll}
+          className="space-y-6 text-sm text-gray-700 leading-relaxed overflow-y-auto max-h-[60vh] pr-3"
+        >
           <p>
             These Terms & Conditions (“T&Cs”) govern the use of the instalment
             payment option made available through BTM’s partnership with
@@ -94,12 +131,34 @@ export default function TermsModal({ open, onClose }: TermsModalProps) {
           </section>
         </div>
 
-        <div className="mt-6 flex justify-end">
+        {/* Scroll notice */}
+        {!canAccept && (
+          <p className="text-xs text-gray-500 mt-3 italic">
+            Please scroll to the bottom to enable the Accept button.
+          </p>
+        )}
+
+        {/* Footer buttons */}
+        <div className="mt-6 flex justify-end space-x-3">
           <button
-            className="px-4 py-2 bg-primary text-white rounded-lg"
+            className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg"
             onClick={onClose}
           >
             Close
+          </button>
+          <button
+            className={`px-4 py-2 rounded-lg text-white ${
+              canAccept ? "bg-primary" : "bg-gray-400 cursor-not-allowed"
+            }`}
+            onClick={() => {
+              if (canAccept) {
+                onAccept?.();
+                onClose();
+              }
+            }}
+            disabled={!canAccept}
+          >
+            Accept
           </button>
         </div>
       </div>
