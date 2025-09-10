@@ -9,75 +9,13 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Upload, FileText } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import TermsModal from './TermsModal';
+import { FormDatas, initialFormData } from '@/lib/utils';
 
-interface FormData {
-  loanType: string;
-  bvn: string;
-  title: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  maritalStatus: string;
-  education: string;
-  identification: string;
-  identificationNo: string;
-  dateOfBirth: string;
-  mobile: string;
-  email: string;
-  homeAddress: string;
-  building: string;
-  landmark: string;
-  busStop: string;
-  lga: string;
-  state: string;
-  stayLength: string;
-  previousAddress: string;
-  accommodation: string;
-  refereePhone: string;
-  spousePhone: string;
-  dependents: string;
-  employmentStatus: string;
-  occupation: string;
-  designation: string;
-  department: string;
-  employerName: string;
-  officeAddress: string;
-  officeLandmark: string;
-  officeLga: string;
-  officeState: string;
-  officialEmail: string;
-  timeInEmployment: string;
-  taxId: string;
-  netIncome: string;
-  staffId: string;
-  otherIncome: string;
-  employmentType: string;
-  paymentOption: string;
-  loanAmount: string;
-  tenor: string;
-  loanPurpose: string;
-  repaymentMode: string;
-  existingLoan: string;
-  repaymentIfYes: string;
-  accountName: string;
-  accountNo: string;
-  accountType: string;
-  bankName: string;
-  kinName: string;
-  kinRelationship: string;
-  kinAddress: string;
-  kinPhone: string;
-  kinEmail: string;
-  kinEmployer: string;
-  referralSource: string[];
-  accountOfficer: string;
-  privacyConsent: boolean;
-  kinConsent: boolean;
-}
 
 const LoanApplicationForm: React.FC = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<FormDatas>({
     loanType: '',
     bvn: '',
     title: '',
@@ -141,17 +79,38 @@ const LoanApplicationForm: React.FC = () => {
     privacyConsent: false,
     kinConsent: false,
   });
+  const [showTerms, setShowTerms] = useState(false);
 
-  const handleInputChange = (field: keyof FormData, value: any) => {
+
+  const handleInputChange = (field: keyof FormDatas, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async(e: React.FormEvent) => {
     e.preventDefault();
-    toast({
+     try {
+    const response = await fetch("http://localhost:5000/api/submit-form", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ formData }),
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+       toast({
       title: "Application Submitted",
       description: "Your loan application has been submitted successfully!",
     });
+      setFormData({ ...initialFormData }); // reset if needed
+    } else {
+      alert("Failed to submit form");
+    }
+  } catch (error) {
+    console.error("❌ Error submitting form:", error);
+    alert("Server error while submitting form");
+  }
+  
   };
 
   const SectionHeader: React.FC<{ title: string }> = ({ title }) => (
@@ -164,63 +123,76 @@ const LoanApplicationForm: React.FC = () => {
     <div className="min-h-screen bg-form-bg py-8 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <Card className="shadow-lg">
-            <CardContent className="p-6">
-              <div className="flex flex-col lg:flex-row justify-between items-start gap-6">
-                <div className="flex-1">
-                  <div className="text-2xl font-bold text-primary mb-2">ZEDVANCE</div>
-                  <div className="text-sm text-muted-foreground space-y-1">
-                    <p>65, Karimu Kotun Street,</p>
-                    <p>Victoria Island, Lagos.</p>
-                    <p>Tel: 07001001000</p>
-                    <p>www.zedvance.com</p>
-                  </div>
-                </div>
-                
-                <div className="text-center">
-                  <h1 className="text-xl font-bold mb-4">LOAN APPLICATION FORM</h1>
-                  <div className="mb-4">
-                    <p className="text-sm font-medium mb-2">SELECT LOAN TYPE</p>
-                    <div className="flex flex-wrap gap-4 justify-center">
-                      {['PERSONAL LOAN', 'GROUP LOAN', 'TRAVEL LOAN'].map((type) => (
-                        <label key={type} className="flex items-center space-x-2 cursor-pointer">
-                          <Checkbox 
-                            checked={formData.loanType === type}
-                            onCheckedChange={() => handleInputChange('loanType', type)}
-                          />
-                          <span className="text-sm">{type}</span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="w-32 h-40 border border-border bg-muted flex items-center justify-center text-xs text-center">
-                  <div>
-                    <Upload className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
-                    <p>AFFIX PASSPORT PHOTOGRAPH HERE</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="mt-6">
-                <Label htmlFor="bvn" className="text-sm font-semibold">BVN</Label>
-                <Input
-                  id="bvn"
-                  value={formData.bvn}
-                  onChange={(e) => handleInputChange('bvn', e.target.value)}
-                  className="mt-1 max-w-xs"
-                  placeholder="Enter your BVN"
-                />
-              </div>
-              
-              <div className="mt-4 text-xs text-muted-foreground">
-                <p><strong>Disclaimer:</strong> Do not make any loan repayment to any personal bank accounts. All loan repayments must be made to official Zedvance Finance bank accounts with the account name "Zedvance Finance Limited". Zedvance Finance Limited shall not be held liable for any losses borne from interactions with fraudulent individuals.</p>
-              </div>
-            </CardContent>
-          </Card>
+    {/* Header */}
+<div className="mb-8">
+  <Card className="shadow-lg">
+    <CardContent className="p-6">
+<div className="mb-8">
+  <div className="p-6">
+    {/* Header */}
+    <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-between lg:items-start">
+      
+      {/* Logo & Company Info (stacked under logo) */}
+      <div className="flex flex-col items-center text-center space-y-3">
+     
+        {/* Company Info */}
+        <div className="space-y-1">
+          <div className="text-2xl font-bold text-primary">BTM HOLIDAY'S</div>
+          <div className="text-sm text-muted-foreground">
+            <p>45, Oduduwa way,</p>
+            <p>Ikeja, Lagos.</p>
+            <p>Tel: 08129911906</p>
+            <p>www.btmliminted.net</p>
+          </div>
         </div>
+      </div>
+
+      {/* Loan Title & Selection */}
+      <div className="text-center mt-6 lg:mt-0">
+        <h1 className="text-2xl md:text-3xl font-bold mb-4">LOAN APPLICATION FORM</h1>
+        <div className="mb-4">
+          <p className="text-sm font-medium mb-2">SELECT LOAN TYPE</p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <label className="flex items-center space-x-2 cursor-pointer">
+              <Checkbox 
+                checked={formData.loanType === 'TRAVEL LOAN'}
+                onCheckedChange={() => handleInputChange('loanType', 'TRAVEL LOAN')}
+              />
+              <span className="text-sm">TRAVEL LOAN</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+      {/* BVN Input */}
+      <div className="mt-6">
+        <Label htmlFor="bvn" className="text-sm font-semibold">BVN</Label>
+        <Input
+          id="bvn"
+          value={formData.bvn}
+          onChange={(e) => handleInputChange('bvn', e.target.value)}
+          className="mt-1 max-w-xs"
+          placeholder="Enter your BVN"
+        />
+      </div>
+          
+      {/* Disclaimer */}
+      <div className="mt-4 text-xs text-muted-foreground">
+        <p>
+          <strong>Disclaimer:</strong> Do not make any loan repayment to any personal bank accounts. All loan repayments must be made to official Zedvance Finance bank accounts with the account name "Zedvance Finance Limited". Zedvance Finance Limited, in partnership with BTM Holidays, shall not be held liable for any losses borne from interactions with fraudulent individuals.
+        </p>
+      </div>
+
+    </CardContent>
+  </Card>
+</div>
+
 
         {/* Form */}
         <Card className="shadow-lg">
@@ -708,6 +680,8 @@ const LoanApplicationForm: React.FC = () => {
               </div>
             </CardContent>
 
+
+
             {/* Loan Details */}
             <SectionHeader title="LOAN DETAILS" />
             <CardContent className="p-6">
@@ -722,17 +696,22 @@ const LoanApplicationForm: React.FC = () => {
                     placeholder="₦"
                   />
                 </div>
-                
+
                 <div>
-                  <Label htmlFor="tenor">Tenor (months)</Label>
-                  <Input
-                    id="tenor"
-                    value={formData.tenor}
-                    onChange={(e) => handleInputChange('tenor', e.target.value)}
-                    className="mt-1"
-                  />
+                  <Label htmlFor="tenor">Tenor</Label>
+                  <div className="flex flex-col space-y-2 mt-1">
+                    {['2 weeks', '1 month', '3 months', '6 months'].map((option) => (
+                      <label key={option} className="flex items-center space-x-2 cursor-pointer">
+                        <Checkbox
+                          checked={formData.tenor === option}
+                          onCheckedChange={() => handleInputChange('tenor', option)}
+                        />
+                        <span className="text-sm">{option}</span>
+                      </label>
+                    ))}
+                  </div>
                 </div>
-                
+
                 <div>
                   <Label htmlFor="loanPurpose">Loan Purpose</Label>
                   <Input
@@ -742,7 +721,7 @@ const LoanApplicationForm: React.FC = () => {
                     className="mt-1"
                   />
                 </div>
-                
+
                 <div>
                   <Label>Repayment Mode</Label>
                   <RadioGroup 
@@ -758,7 +737,7 @@ const LoanApplicationForm: React.FC = () => {
                     ))}
                   </RadioGroup>
                 </div>
-                
+
                 <div>
                   <Label>Any Existing Loan?</Label>
                   <RadioGroup 
@@ -774,7 +753,7 @@ const LoanApplicationForm: React.FC = () => {
                     ))}
                   </RadioGroup>
                 </div>
-                
+
                 <div>
                   <Label htmlFor="repaymentIfYes">Repayment (If Yes)</Label>
                   <Input
@@ -787,51 +766,7 @@ const LoanApplicationForm: React.FC = () => {
               </div>
             </CardContent>
 
-            {/* Disbursement Bank Details */}
-            <SectionHeader title="DISBURSEMENT BANK DETAILS" />
-            <CardContent className="p-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <Label htmlFor="accountName">Account Name</Label>
-                  <Input
-                    id="accountName"
-                    value={formData.accountName}
-                    onChange={(e) => handleInputChange('accountName', e.target.value)}
-                    className="mt-1"
-                  />
-                </div>
-                
-                <div>
-                  <Label htmlFor="accountNo">Account No</Label>
-                  <Input
-                    id="accountNo"
-                    value={formData.accountNo}
-                    onChange={(e) => handleInputChange('accountNo', e.target.value)}
-                    className="mt-1"
-                  />
-                </div>
-                
-                <div>
-                  <Label htmlFor="accountType">Account Type</Label>
-                  <Input
-                    id="accountType"
-                    value={formData.accountType}
-                    onChange={(e) => handleInputChange('accountType', e.target.value)}
-                    className="mt-1"
-                  />
-                </div>
-                
-                <div>
-                  <Label htmlFor="bankName">Bank Name</Label>
-                  <Input
-                    id="bankName"
-                    value={formData.bankName}
-                    onChange={(e) => handleInputChange('bankName', e.target.value)}
-                    className="mt-1"
-                  />
-                </div>
-              </div>
-            </CardContent>
+
 
             {/* Next of Kin Info */}
             <SectionHeader title="NEXT OF KIN INFO" />
@@ -900,42 +835,6 @@ const LoanApplicationForm: React.FC = () => {
               </div>
             </CardContent>
 
-            {/* Other Info */}
-            <SectionHeader title="OTHER INFO" />
-            <CardContent className="p-6">
-              <div className="space-y-4">
-                <div>
-                  <Label className="text-sm font-medium">How did you hear about us:</Label>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-2">
-                    {['Referral', 'Radio Jingle', 'Sales Agent', 'Website', 'Email', 'SMS', 'Twitter', 'Facebook', 'LinkedIn', 'Instagram', 'BBM Channel/Ad', 'Google Ad', 'BRT Advert', 'Billboard Advert', 'Linda Ikeji', 'Others'].map((source) => (
-                      <label key={source} className="flex items-center space-x-2 cursor-pointer">
-                        <Checkbox 
-                          checked={formData.referralSource.includes(source)}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              handleInputChange('referralSource', [...formData.referralSource, source]);
-                            } else {
-                              handleInputChange('referralSource', formData.referralSource.filter(s => s !== source));
-                            }
-                          }}
-                        />
-                        <span className="text-sm">{source}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-                
-                <div>
-                  <Label htmlFor="accountOfficer">Account Officer</Label>
-                  <Input
-                    id="accountOfficer"
-                    value={formData.accountOfficer}
-                    onChange={(e) => handleInputChange('accountOfficer', e.target.value)}
-                    className="mt-1"
-                  />
-                </div>
-              </div>
-            </CardContent>
 
             {/* Attestation */}
             <SectionHeader title="ATTESTATION" />
@@ -966,41 +865,62 @@ const LoanApplicationForm: React.FC = () => {
             </CardContent>
 
             {/* Privacy Policy */}
-            <SectionHeader title="PRIVACY POLICY" />
-            <CardContent className="p-6">
-              <div className="space-y-4">
-                <p className="text-xs text-muted-foreground">
-                  Zedvance respects your personal data and commits to ensure adequate level of protection for your personal data in compliance with applicable laws. Data provided to Zedvance through this form is processed in compliance with applicable laws and in line with our General Data Privacy Policy, which communicates our standard approach and obligations in the collection, use and disclosure of personal data, in accordance with applicable Data Protection Laws. By attesting to this you authorize Zedvance to process your data to enable us onboard you as a customer and effectively process your loan application. You may view our Privacy Policy on our website www.zedvance.com if you require more information about your data processing, and you can contact the Company's DPO through the following contact details to lay complaints or make inquiries: customercare@zedvance.com.
-                </p>
-                
-                <div className="space-y-3">
-                  <label className="flex items-start space-x-3 cursor-pointer">
-                    <Checkbox 
-                      checked={formData.privacyConsent}
-                      onCheckedChange={(checked) => handleInputChange('privacyConsent', checked)}
-                      className="mt-1"
-                    />
-                    <span className="text-sm">I confirm that I have read, understood and agree to the above privacy policy.</span>
-                  </label>
-                  
-                  <label className="flex items-start space-x-3 cursor-pointer">
-                    <Checkbox 
-                      checked={formData.kinConsent}
-                      onCheckedChange={(checked) => handleInputChange('kinConsent', checked)}
-                      className="mt-1"
-                    />
-                    <span className="text-sm">I confirm that I have obtained permission from my next of kin/any third party to provide their personal data to us.</span>
-                  </label>
+             <SectionHeader title="TERMS & CONDITIONS" />
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  <p className="text-xs text-muted-foreground">
+                    By continuing, you agree to{" "}
+                    <button
+                      type="button"
+                      onClick={() => setShowTerms(true)}
+                      className="text-blue-600 underline"
+                    >
+                      read our Terms & Conditions
+                    </button>{" "}
+                    for instalment payment with Zedvance.
+                  </p>
+
+                  <div className="space-y-3">
+                    <label className="flex items-start space-x-3 cursor-pointer">
+                      <Checkbox
+                        checked={formData.privacyConsent}
+                        onCheckedChange={(checked) =>
+                          handleInputChange("privacyConsent", checked)
+                        }
+                        className="mt-1"
+                      />
+                      <span className="text-sm">
+                        I confirm that I have read, understood and agree to the above
+                        Terms & Conditions.
+                      </span>
+                    </label>
+
+                    <label className="flex items-start space-x-3 cursor-pointer">
+                      <Checkbox
+                        checked={formData.kinConsent}
+                        onCheckedChange={(checked) =>
+                          handleInputChange("kinConsent", checked)
+                        }
+                        className="mt-1"
+                      />
+                      <span className="text-sm">
+                        I confirm that I have obtained permission from my next of kin/any
+                        third party to provide their personal data to us.
+                      </span>
+                    </label>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
+              </CardContent>
+
+            {/* Terms Modal */}
+            <TermsModal open={showTerms} onClose={() => setShowTerms(false)} />
 
             {/* Submit Button */}
             <CardContent className="p-6 bg-muted">
               <Button 
                 type="submit" 
                 className="w-full md:w-auto px-8 py-3 bg-primary hover:bg-primary/90"
-                disabled={!formData.privacyConsent || !formData.kinConsent}
+                disabled={!formData.privacyConsent || !formData.kinConsent || !formData}
               >
                 <FileText className="w-4 h-4 mr-2" />
                 Submit Application
